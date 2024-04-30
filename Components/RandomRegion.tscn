@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://5vki45c4w8ln"]
+
+[ext_resource type="Script" path="res://Components/RandomRegion.gd" id="1_04v55"]
+
+[node name="RandomRegion" type="Node"]
+script = ExtResource("1_04v55")

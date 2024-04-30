@@ -1,0 +1,149 @@
+[gd_scene load_steps=17 format=3 uid="uid://b44llw70rcpav"]
+
+[ext_resource type="Script" path="res://World/World.gd" id="1_5trqx"]
+[ext_resource type="Texture2D" uid="uid://cgnxahkxp6tyo" path="res://World/Tiles.png" id="1_h0f3m"]
+[ext_resource type="PackedScene" uid="uid://cqwij1611r716" path="res://World/YellowTree.tscn" id="3_l8enl"]
+[ext_resource type="PackedScene" uid="uid://cowgneyiv5jdd" path="res://World/GreenTree.tscn" id="4_w3rni"]
+[ext_resource type="PackedScene" uid="uid://bxostyeyfijgk" path="res://World/YellowBush.tscn" id="5_sw7py"]
+[ext_resource type="Script" path="res://World/WorldCamera.gd" id="5_y4pff"]
+[ext_resource type="PackedScene" uid="uid://djwh0a531jbh1" path="res://World/GreenBush.tscn" id="6_oglo5"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2x2ug"]
+seed = 2037166072
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h54r4"]
+noise_type = 3
+seed = -2101015869
+frequency = 0.1676
+fractal_type = 3
+fractal_octaves = 10
+fractal_lacunarity = 2.745
+fractal_gain = 1.88
+fractal_weighted_strength = 0.01
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vc3vf"]
+noise_type = 3
+seed = 652538897
+frequency = 0.026
+fractal_type = 3
+fractal_octaves = 10
+fractal_lacunarity = 2.745
+fractal_gain = 1.88
+fractal_weighted_strength = 0.01
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mw2ft"]
+noise_type = 3
+seed = -1390503976
+frequency = 0.053
+fractal_type = 3
+fractal_octaves = 10
+fractal_lacunarity = 2.745
+fractal_gain = 1.88
+fractal_weighted_strength = 0.01
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_w3x3w"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_kvo1s"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8vbwt"]
+texture = ExtResource("1_h0f3m")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_w3x3w")
+0:0/0/custom_data_0 = "EmptyDirt"
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_w3x3w")
+1:0/0/custom_data_0 = "EmptyDirt"
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_w3x3w")
+2:0/0/custom_data_0 = "Dirt"
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_w3x3w")
+0:1/0/custom_data_0 = "EmptyGrass"
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_w3x3w")
+1:1/0/custom_data_0 = "EmptyGrass"
+2:1/0 = 0
+2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:1/0/physics_layer_0/angular_velocity = 0.0
+2:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_w3x3w")
+2:1/0/custom_data_0 = "Grass"
+3:1/0 = 0
+3:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:1/0/physics_layer_0/angular_velocity = 0.0
+3:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_w3x3w")
+3:1/0/custom_data_0 = "Grass"
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+0:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_kvo1s")
+0:2/0/custom_data_0 = "EmptySand"
+1:2/0 = 0
+1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:2/0/physics_layer_0/angular_velocity = 0.0
+1:2/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_kvo1s")
+1:2/0/custom_data_0 = "EmptySand"
+0:3/0 = 0
+0:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:3/0/physics_layer_0/angular_velocity = 0.0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:3/0/custom_data_0 = "EmptyWater"
+1:3/0 = 0
+1:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:3/0/physics_layer_0/angular_velocity = 0.0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:3/0/custom_data_0 = "EmptyWater"
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_rrqd4"]
+resource_name = "Objects"
+scenes/0/scene = ExtResource("3_l8enl")
+scenes/1/scene = ExtResource("4_w3rni")
+scenes/2/scene = ExtResource("5_sw7py")
+scenes/3/scene = ExtResource("6_oglo5")
+
+[sub_resource type="TileSet" id="TileSet_xaqya"]
+physics_layer_0/collision_layer = 1
+navigation_layer_0/layers = 1
+custom_data_layer_0/name = "Name"
+custom_data_layer_0/type = 4
+sources/0 = SubResource("TileSetAtlasSource_8vbwt")
+sources/1 = SubResource("TileSetScenesCollectionSource_rrqd4")
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_5trqx")
+terrain_noise = SubResource("FastNoiseLite_2x2ug")
+object_noise = Array[FastNoiseLite]([SubResource("FastNoiseLite_h54r4"), SubResource("FastNoiseLite_h54r4"), SubResource("FastNoiseLite_vc3vf"), SubResource("FastNoiseLite_mw2ft")])
+
+[node name="TileMap" type="TileMap" parent="."]
+y_sort_enabled = true
+tile_set = SubResource("TileSet_xaqya")
+format = 2
+layer_0/name = "Ground"
+layer_1/name = "OnGround"
+layer_1/y_sort_enabled = true
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
+
+[node name="WorldCamera" type="Camera2D" parent="."]
+position = Vector2(2376, 1943)
+zoom = Vector2(0.835, 0.835)
+script = ExtResource("5_y4pff")

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxostyeyfijgk"]
+
+[ext_resource type="Texture2D" uid="uid://dv88mtsvtqor5" path="res://World/Objects.png" id="1_nlxee"]
+[ext_resource type="PackedScene" uid="uid://bu6u728d4c01b" path="res://Components/RandomOffset.tscn" id="2_gy1aw"]
+[ext_resource type="PackedScene" uid="uid://5vki45c4w8ln" path="res://Components/RandomRegion.tscn" id="2_m5th1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hx685"]
+radius = 5.0
+
+[node name="YellowBush" type="StaticBody2D"]
+y_sort_enabled = true
+position = Vector2(0, -8)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_nlxee")
+region_enabled = true
+
+[node name="RandomRegion" parent="Sprite2D" instance=ExtResource("2_m5th1")]
+regions = Array[Rect2]([Rect2(16, 0, 16, 16), Rect2(32, 0, 16, 16), Rect2(16, 16, 16, 16), Rect2(32, 16, 16, 16)])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+shape = SubResource("CircleShape2D_hx685")
+
+[node name="RandomOffset" parent="." instance=ExtResource("2_gy1aw")]
+offsets = Array[Vector2]([Vector2(-4, 0), Vector2(4, 0), Vector2(0, -4), Vector2(0, 4)])

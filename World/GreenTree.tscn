@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cowgneyiv5jdd"]
+
+[ext_resource type="Texture2D" uid="uid://dv88mtsvtqor5" path="res://World/Objects.png" id="1_0wtpc"]
+[ext_resource type="PackedScene" uid="uid://bu6u728d4c01b" path="res://Components/RandomOffset.tscn" id="2_hh6y4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ew458"]
+radius = 3.0
+
+[node name="GreenTree" type="StaticBody2D"]
+y_sort_enabled = true
+position = Vector2(0, -16)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0wtpc")
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 13)
+shape = SubResource("CircleShape2D_ew458")
+
+[node name="RandomOffset" parent="." instance=ExtResource("2_hh6y4")]
+offsets = Array[Vector2]([Vector2(-4, 0), Vector2(4, 0), Vector2(0, -4), Vector2(0, 4)])
