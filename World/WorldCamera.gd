@@ -1,9 +1,9 @@
-extends Camera2D
+class_name WorldCamera extends Camera2D
 
 @export_category("Properties")
-@export var default_zoom := Vector2(3, 3)
 @export var minimum_zoom := Vector2.ONE
 @export var maximum_zoom := Vector2(6, 6)
+@export var default_zoom := Vector2(3, 3)
 
 var target_zoom := default_zoom
 var target_global_position := global_position

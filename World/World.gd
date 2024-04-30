@@ -1,7 +1,9 @@
 @tool
 extends Node2D
 
-@onready var tile_map = $TileMap
+@onready var tile_map := $TileMap
+
+@export var world_camera: WorldCamera
 
 @export_category("Generation Settings")
 @export var world_size := Vector2i(256, 256)
@@ -18,6 +20,21 @@ extends Node2D
 
 func _ready():
 	generate_world()
+	
+	var local_spawn_position = Vector2.ZERO
+	for tile in tile_map.get_used_cells(0):
+		tile = tile as Vector2
+		
+		if (tile_map as TileMap).get_cell_source_id(1, tile) != -1:
+			continue
+		
+		if local_spawn_position.distance_to(world_size / 2) > tile.distance_to(world_size / 2):
+			local_spawn_position = tile
+	
+	spawn_local(to_global(tile_map.map_to_local(local_spawn_position)), Main.Sex.Male)
+	spawn_local(to_global(tile_map.map_to_local(local_spawn_position + Vector2(randi_range(-5, 5), randi_range(-5, 5)))), Main.Sex.Female)
+	
+	world_camera.target_global_position = to_global(tile_map.map_to_local(local_spawn_position))
 
 func _input(_event):
 	if Input.is_action_just_pressed("DEBUG_RELOAD"):
@@ -78,3 +95,11 @@ func generate_world():
 						continue
 					
 					tile_map.set_cell(object.layer, Vector2i(x, y), 1, Vector2.ZERO, i)
+
+func spawn_local(spawn_position: Vector2, sex: Main.Sex, role: Main.Role = Main.Role.None):
+	var local = Main.LocalScene.instantiate()
+	local.sex = sex
+	local.role = role
+	local.global_position = spawn_position
+	
+	add_child(local)

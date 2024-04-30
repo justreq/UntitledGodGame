@@ -1,5 +1,16 @@
 extends Node
 
+const LocalScene := preload("res://Local/Local.tscn")
+
+enum Sex {
+	Male,
+	Female,
+}
+
+enum Role {
+	None,
+}
+
 const TILE_GENERATION_PROPERTIES := [
 	{
 		"name": "Water",
