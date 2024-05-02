@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cf282lebi4htw"]
+
+[ext_resource type="Script" path="res://Local/States/Eating.gd" id="1_syw0b"]
+
+[node name="Eating" type="Node2D"]
+visible = false
+script = ExtResource("1_syw0b")

@@ -25,14 +25,15 @@ func _ready():
 	for tile in tile_map.get_used_cells(0):
 		tile = tile as Vector2
 		
-		if (tile_map as TileMap).get_cell_source_id(1, tile) != -1:
+		if not (tile_map as TileMap).get_cell_source_id(1, tile) == -1:
 			continue
 		
 		if local_spawn_position.distance_to(world_size / 2) > tile.distance_to(world_size / 2):
 			local_spawn_position = tile
 	
-	spawn_local(to_global(tile_map.map_to_local(local_spawn_position)), Main.Sex.Male)
-	spawn_local(to_global(tile_map.map_to_local(local_spawn_position + Vector2(randi_range(-5, 5), randi_range(-5, 5)))), Main.Sex.Female)
+	spawn_local(to_global(tile_map.map_to_local(local_spawn_position)), Local.Sex.Male)
+	local_spawn_position += Vector2(randi_range(-5, 5), randi_range(-5, 5))
+	spawn_local(to_global(tile_map.map_to_local(local_spawn_position)), Local.Sex.Female)
 	
 	world_camera.target_global_position = to_global(tile_map.map_to_local(local_spawn_position))
 
@@ -91,12 +92,12 @@ func generate_world():
 				noise_at_position = get_noise(object_noise[i], x, y)
 				
 				if noise_at_position <= object.threshold_max and noise_at_position >= object.threshold_min:
-					if !object.whitelist.has(tile_map.get_cell_tile_data(0, Vector2i(x, y)).get_custom_data("Name")):
+					if not object.whitelist.has(tile_map.get_cell_tile_data(0, Vector2i(x, y)).get_custom_data("Name")):
 						continue
 					
 					tile_map.set_cell(object.layer, Vector2i(x, y), 1, Vector2.ZERO, i)
 
-func spawn_local(spawn_position: Vector2, sex: Main.Sex, role: Main.Role = Main.Role.None):
+func spawn_local(spawn_position: Vector2, sex: Local.Sex, role := Local.Role.None):
 	var local = Main.LocalScene.instantiate()
 	local.sex = sex
 	local.role = role

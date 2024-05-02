@@ -19,5 +19,10 @@ region_rect = Rect2(0, 32, 16, 32)
 position = Vector2(0, 13)
 shape = SubResource("CircleShape2D_ew458")
 
-[node name="RandomOffset" parent="." instance=ExtResource("2_hh6y4")]
+[node name="RandomOffset" parent="." node_paths=PackedStringArray("node") instance=ExtResource("2_hh6y4")]
+node = NodePath("..")
 offsets = Array[Vector2]([Vector2(-4, 0), Vector2(4, 0), Vector2(0, -4), Vector2(0, 4)])
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+position = Vector2(0, 13)
+radius = 3.0

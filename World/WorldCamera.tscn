@@ -3,6 +3,4 @@
 [ext_resource type="Script" path="res://World/WorldCamera.gd" id="1_xb43m"]
 
 [node name="WorldCamera" type="Camera2D"]
-limit_left = 0
-limit_top = 0
 script = ExtResource("1_xb43m")

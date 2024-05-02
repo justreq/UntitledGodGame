@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://caldcxhbs5gat"]
+
+[ext_resource type="Script" path="res://Local/States/Sleeping.gd" id="1_k0gd0"]
+
+[node name="Sleeping" type="Node2D"]
+visible = false
+script = ExtResource("1_k0gd0")

@@ -1,8 +1,12 @@
-[gd_scene load_steps=47 format=3 uid="uid://dw6xsckvmeku0"]
+[gd_scene load_steps=51 format=3 uid="uid://dw6xsckvmeku0"]
 
 [ext_resource type="Script" path="res://Local/Local.gd" id="1_35okp"]
 [ext_resource type="Texture2D" uid="uid://dbdrmdq2y63ex" path="res://Local/LocalFemale.png" id="1_ada12"]
 [ext_resource type="Texture2D" uid="uid://bnv4brvcgwn23" path="res://Local/LocalMale.png" id="1_avg47"]
+[ext_resource type="PackedScene" uid="uid://caldcxhbs5gat" path="res://Local/States/Sleeping.tscn" id="4_5swvj"]
+[ext_resource type="PackedScene" uid="uid://cf282lebi4htw" path="res://Local/States/Eating.tscn" id="4_ogoaf"]
+[ext_resource type="PackedScene" uid="uid://ccwiq4480yoj7" path="res://Local/States/Wandering.tscn" id="5_j26ra"]
+[ext_resource type="PackedScene" uid="uid://cr25ianxmk2iw" path="res://Local/States/SwimmingToLand.tscn" id="7_hqrwo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xe04j"]
 atlas = ExtResource("1_avg47")
@@ -375,6 +379,7 @@ radius = 2.0
 height = 8.0
 
 [node name="Local" type="CharacterBody2D"]
+y_sort_enabled = true
 position = Vector2(0, -8)
 script = ExtResource("1_35okp")
 
@@ -396,3 +401,20 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_pkywo")
 
 [node name="NavigationAgent" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="StateMachine" type="Node" parent="."]
+
+[node name="Wandering" parent="StateMachine" node_paths=PackedStringArray("local") instance=ExtResource("5_j26ra")]
+visible = true
+local = NodePath("../..")
+
+[node name="SwimmingToLand" parent="StateMachine" node_paths=PackedStringArray("local") instance=ExtResource("7_hqrwo")]
+local = NodePath("../..")
+
+[node name="Sleeping" parent="StateMachine" node_paths=PackedStringArray("local") instance=ExtResource("4_5swvj")]
+local = NodePath("../..")
+
+[node name="Eating" parent="StateMachine" node_paths=PackedStringArray("local") instance=ExtResource("4_ogoaf")]
+local = NodePath("../..")
