@@ -380,24 +380,23 @@ height = 8.0
 
 [node name="Local" type="CharacterBody2D"]
 y_sort_enabled = true
+position = Vector2(0, -8)
 script = ExtResource("1_35okp")
 
 [node name="SpriteMale" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_2slyh")
 animation = &"idle_down"
 autoplay = "idle_down"
 
 [node name="SpriteFemale" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_y7c04")
 animation = &"idle_down"
 autoplay = "idle_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2)
+position = Vector2(0, 6)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_pkywo")
 
@@ -407,24 +406,14 @@ debug_enabled = true
 
 [node name="StateMachine" type="Node" parent="."]
 
-[node name="Wandering" type="Node" parent="StateMachine" node_paths=PackedStringArray("local")]
+[node name="Wandering" type="Node" parent="StateMachine"]
 script = ExtResource("7_qqq1b")
-local = NodePath("../..")
 
-[node name="Timer" type="Timer" parent="StateMachine/Wandering"]
-autostart = true
-
-[node name="Swimming" type="Node" parent="StateMachine" node_paths=PackedStringArray("local")]
+[node name="Swimming" type="Node" parent="StateMachine"]
 script = ExtResource("6_74pbt")
-local = NodePath("../..")
 
-[node name="Sleeping" type="Node" parent="StateMachine" node_paths=PackedStringArray("local")]
+[node name="Sleeping" type="Node" parent="StateMachine"]
 script = ExtResource("5_jpbsk")
-local = NodePath("../..")
 
-[node name="Eating" type="Node" parent="StateMachine" node_paths=PackedStringArray("local")]
+[node name="Eating" type="Node" parent="StateMachine"]
 script = ExtResource("4_em6yv")
-local = NodePath("../..")
-
-[connection signal="velocity_computed" from="NavigationAgent" to="." method="_on_navigation_agent_velocity_computed"]
-[connection signal="timeout" from="StateMachine/Wandering/Timer" to="StateMachine/Wandering" method="_on_timer_timeout"]

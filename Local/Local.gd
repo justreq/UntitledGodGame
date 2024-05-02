@@ -1,4 +1,5 @@
-class_name Local extends CharacterBody2D
+extends CharacterBody2D
+class_name Local
 
 enum Sex {
 	Male,
@@ -19,6 +20,8 @@ enum Role {
 @export_range(0, 100, 1, "or_greater") var age := 0
 @export var role := Role.None
 
+const MOVE_SPEED := 5000
+
 func _ready():
 	if sex == Local.Sex.Male:
 		sprite_male.visible = true
@@ -28,7 +31,10 @@ func _ready():
 		sprite_female.visible = true
 
 func _physics_process(delta):
-	var direction = global_position.direction_to(navigation_agent.target_position)
-	velocity = direction * 5000 * delta
+	var direction = global_position.direction_to(navigation_agent.get_next_path_position())
+	navigation_agent.velocity = direction * MOVE_SPEED * delta
 	
 	move_and_slide()
+
+func _on_navigation_agent_velocity_computed(safe_velocity):
+	velocity = safe_velocity

@@ -9,9 +9,9 @@ radius = 5.0
 
 [node name="YellowBush" type="StaticBody2D"]
 y_sort_enabled = true
-position = Vector2(0, -8)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
 texture = ExtResource("1_nlxee")
 region_enabled = true
 
@@ -20,7 +20,7 @@ sprite = NodePath("..")
 regions = Array[Rect2]([Rect2(16, 0, 16, 16), Rect2(32, 0, 16, 16), Rect2(16, 16, 16, 16), Rect2(32, 16, 16, 16)])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
+position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_hx685")
 
 [node name="RandomOffset" parent="." node_paths=PackedStringArray("node") instance=ExtResource("2_gy1aw")]
@@ -28,5 +28,5 @@ node = NodePath("..")
 offsets = Array[Vector2]([Vector2(-4, 0), Vector2(4, 0), Vector2(0, -4), Vector2(0, 4)])
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
-position = Vector2(0, 3)
+position = Vector2(0, -5)
 radius = 5.0

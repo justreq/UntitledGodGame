@@ -19,23 +19,28 @@ extends Node2D
 	set(v): generate_world()
 
 func _ready():
-	generate_world()
+	if not Engine.is_editor_hint():
+		generate_world()
 	
-	var local_spawn_position = Vector2.ZERO
-	for tile in tile_map.get_used_cells(0):
+	var local_spawn_positions = []
+	var spawnable_area = tile_map.get_used_cells(0).filter(
+		func(t): return t.x in range(world_size.x / 2 - 5, world_size.x / 2 + 5)\
+					and t.y in range(world_size.y / 2 - 5, world_size.y / 2 + 5))
+	
+	for tile in spawnable_area:
 		tile = tile as Vector2
 		
-		if not (tile_map as TileMap).get_cell_source_id(1, tile) == -1:
-			continue
+		if (tile_map as TileMap).get_cell_source_id(1, tile) == -1:
+			local_spawn_positions.append(tile)
 		
-		if local_spawn_position.distance_to(world_size / 2) > tile.distance_to(world_size / 2):
-			local_spawn_position = tile
+		if local_spawn_positions.size() >= 2:
+			break
 	
-	spawn_local(to_global(tile_map.map_to_local(local_spawn_position)), Local.Sex.Male)
-	local_spawn_position += Vector2(randi_range(-5, 5), randi_range(-5, 5))
-	spawn_local(to_global(tile_map.map_to_local(local_spawn_position)), Local.Sex.Female)
+	for i in range(local_spawn_positions.size()):
+		spawn_local(to_global(tile_map.map_to_local(local_spawn_positions[i])), Local.Sex.Male if i % 2 == 0 else Local.Sex.Female)
 	
-	world_camera.target_global_position = to_global(tile_map.map_to_local(local_spawn_position))
+	world_camera.global_position = to_global(tile_map.map_to_local((local_spawn_positions[0] + local_spawn_positions[1]) / 2))
+	world_camera.target_global_position = world_camera.global_position
 
 func _input(_event):
 	if Input.is_action_just_pressed("DEBUG_RELOAD"):
